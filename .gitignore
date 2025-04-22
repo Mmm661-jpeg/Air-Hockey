@@ -1,0 +1,41 @@
+# Node.js dependencies
+**/node_modules/
+
+# Environment variables
+.env
+.env.* 
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VSCode settings
+.vscode/
+
+# Build directories
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# React specific
+*.local
+.cache/
+*.tsbuildinfo
+
+# IDE settings
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Misc
+coverage/
+*.tgz
+.pnp.*
+.pnpm-debug.log*

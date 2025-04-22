@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Air Hockey WebSocket Test</title>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Socket.IO Test</h1>
+  <button onclick="sendMessage()">Send Message</button>
+
+  <script>
+    // Connect to your local server
+    const socket = io('http://localhost:5000');
+
+    // Connection confirmation
+    socket.on('connect', () => {
+      console.log('Connected to server with ID:', socket.id);
+    });
+
+    // Listen for any messages (replace 'message' with your event name)
+    socket.on('message', (data) => {
+      console.log('Received message:', data);
+    });
+
+    // Send a message to the server
+    function sendMessage() {
+      socket.emit('message', { text: 'Hello from client!' });
+    }
+  </script>
+</body>
+</html>
