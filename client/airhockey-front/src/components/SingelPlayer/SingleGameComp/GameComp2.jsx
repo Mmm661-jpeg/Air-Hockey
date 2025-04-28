@@ -5,7 +5,7 @@ import { canvasDimensions, GAME_DIMENSIONS } from "../../../utils/gameSettings";
 import { initialGameState,movePlayer, updateGameState } from "../../../services/singlePlayerServices"
 import { botMove } from "../../../services/botService";
 
-function GameComponent({mode})
+function GameComponent2({mode})
 {
    
     const [gameIsOn,setGameIsOn] = useState(true);;
@@ -20,10 +20,7 @@ function GameComponent({mode})
     const {CANVAS_HEIGHT,CANVAS_WIDTH } = canvasDimensions
     const canvasRef = useRef();
 
-   
-
-
-    const drawCanvas = () =>
+    const drawGame = useCallback(()=>
     {
         const canvas = canvasRef.current;
 
@@ -46,19 +43,9 @@ function GameComponent({mode})
         ctx.fillRect(0, 0, wallWidth, CANVAS_HEIGHT);
 
         ctx.fillRect(CANVAS_WIDTH - wallWidth, 0, wallWidth, CANVAS_HEIGHT);
-  
-    }
 
-    const drawGameObj = () =>
-    {
-        const canvas = canvasRef.current;
+        
 
-        if(!canvas)
-        {
-            return
-        }
-
-        const ctx = canvas.getContext("2d");
 
         const puckX = puck.x * CANVAS_WIDTH;
         const puckY = puck.y * CANVAS_HEIGHT;
@@ -69,6 +56,8 @@ function GameComponent({mode})
         ctx.arc(puckX, puckY, puckRadius, 0, Math.PI * 2);
         ctx.fillStyle = "white";
         ctx.fill();
+
+
 
 
         const paddle1Width = PADDLE_WIDTH * CANVAS_WIDTH;
@@ -95,46 +84,17 @@ function GameComponent({mode})
         );
 
 
-
-    }
-
-    const endGame = () =>
-        {
-            const canvas = canvasRef.current;
-    
-            if(!canvas)
-            {
-                return
-            }
-    
-            const ctx = canvas.getContext("2d");
-    
-            ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-            ctx.fillStyle = "black";
-            ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-    
-    
+        if (!gameIsOn) {
             ctx.fillStyle = "white";
             ctx.font = "40px Arial";
             ctx.textAlign = "center";
-            ctx.fillText("Game Over", CANVAS_WIDTH/ 2, CANVAS_HEIGHT / 2);
-
-            setGameIsOn(false);
+            ctx.fillText("Game Over", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
         }
 
 
+    },[paddle1,paddle2,puck,CANVAS_HEIGHT,CANVAS_WIDTH,gameIsOn]);
 
-    const checkEndGame = (gameState) =>
-    {
-        const diff = Math.abs(gameState.scores.player1 - gameState.scores.player2);
-
-        if(diff > 5)
-        {
-            endGame();
-        }
-    }
-
-    const callMovePlayer = (event) =>
+    const moveThePlayer = useCallback((event)=>
     {
         const left = 37;
         const right = 39;
@@ -148,60 +108,81 @@ function GameComponent({mode})
         {
             setGameState(prev => ({...prev,paddle1:movePlayer(1,prev.paddle1)}));
         }
-      
-    }
+    },[]);
 
-    const callMoveBot = (mode) =>
+    const moveTheBot = useCallback(()=>
     {
         setGameState(prev => ({...prev,paddle2:botMove(prev.paddle2,prev.puck,mode)}));
-    
-    }
 
-    const callUpdatePuck = () =>
+    },[mode]);
+
+    const updatePuck = useCallback(()=>
     {
         setGameState(prev => updateGameState(prev));
 
-    }
+    },[]);
 
-    
- 
+    const gameEnder = useCallback(()=>
+    {
+        const diff = Math.abs(gameState.scores.player1 - gameState.scores.player2);
+
+        if(diff > 5)
+        {
+            setGameIsOn(false);
+        }
+
+    },[scores.player1, scores.player2]);
+
 
     useEffect(() =>
     {
-        const handleKeyDownEvent = (event) =>
+        const handleKeyDownEvent = (event) => {
+          moveThePlayer(event);
+        };
+    
+        window.addEventListener("keydown", handleKeyDownEvent);
+    
+        return () => {
+          window.removeEventListener("keydown", handleKeyDownEvent);
+        };
+
+    }, [moveThePlayer]);
+
+
+    useEffect(()=>
+    {
+
+        if(!gameIsOn)
         {
-            callMovePlayer(event);
+            return
         }
 
-        window.addEventListener("keydown",handleKeyDownEvent);
+        let animationFrameId;
+
+        const gameLoop = () =>
+        {
+            drawGame();
+            updatePuck();
+            moveTheBot();
+            gameEnder();
+
+            animationFrameId = requestAnimationFrame(gameLoop);
+           
+        }
+
+        animationFrameId = requestAnimationFrame(gameLoop);
+
 
         return () =>
         {
-            window.removeEventListener("keydown",handleKeyDownEvent);
+            cancelAnimationFrame(animationFrameId);
         }
 
-    },[])
-
-    useEffect(() => 
-    {
-        if(gameIsOn)
-        {
-            const interval = setInterval(() => {
-
-                drawCanvas();
-                callUpdatePuck();
-                callMoveBot(mode);
-                drawGameObj();
-                checkEndGame(gameState);
-                
-            }, 1000 / 45);
-
-            return () => clearInterval(interval);
-        }
-
-    },[gameIsOn,gameState])
+    },[gameIsOn, moveTheBot, updatePuck, gameEnder, drawGame]);
 
 
+
+   
 
     return(
         <>
@@ -214,4 +195,4 @@ function GameComponent({mode})
     )
 }
 
-export default GameComponent
+export default GameComponent2

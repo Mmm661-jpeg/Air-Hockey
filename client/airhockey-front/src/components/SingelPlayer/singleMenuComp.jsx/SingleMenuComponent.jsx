@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import GameComponent from "../SingleGameComp/gameComponent";
+import GameComponent2 from "../SingleGameComp/GameComp2";
 
 
 function SingleMenuComponent()
@@ -16,7 +17,7 @@ function SingleMenuComponent()
 
     return(<>
 
-        {pressedPlay ? <GameComponent mode={mode}/>
+        {pressedPlay ? <GameComponent2 mode={mode}/>
         
         :
             <div className="flex flex-col align-center justify-between gap-3 p-8 bg-white rounded-lg shadow-xl w-96 h-100">
