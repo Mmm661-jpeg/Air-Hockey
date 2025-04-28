@@ -17,6 +17,7 @@ function MainMenu()
                 Single-Player
               </button>
               <button
+              onClick={()=>navigate('/multiplayer')}
                 className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition font-primary"
               >
                 Multi-Player

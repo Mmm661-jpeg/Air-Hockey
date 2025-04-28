@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 
-const setupSocket = require('./sockets');
+const {setupSocket} = require('./sockets');
 
 const app = express();
 
