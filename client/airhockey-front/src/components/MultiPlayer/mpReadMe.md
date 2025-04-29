@@ -26,7 +26,7 @@ We are telling the browser to run gameLoop just before its natural re-render (at
 
 ### UseEffect(()=>)
 
-In our useffect we have [drawGame, movePlayer] as dependencyies*** these are 2 methods that are inside UseCallback so this means unless the useeffect is triggered when or if these 2 methods are rebuilt (somethings changed like paddle1 x value).
+In our useffect we have [drawGame, movePlayer] as dependencies these are 2 methods that are inside UseCallback so this means that the useeffect is triggered when or if these 2 methods are rebuilt (somethings changes like paddle1 x value).
 
 
 ### Sockets:
