@@ -7,7 +7,8 @@ const {initialGameState} = require('./utils/gameSettings');
 const {updateGameState,movePlayer} = require('./services/gameServices')
 
 let rooms = {};
-let waitingPlayers = []
+let waitingPlayers = [];
+
 
 const setupSocket = (io) =>
 {
@@ -143,28 +144,27 @@ const setupSocket = (io) =>
         });
 
 
-        socket.emit('updateGame',()=>
-        {
-           
-        });
     
     });
 
 
+   
+    
     setInterval(() => {
 
-        for(const roomId in rooms)
+        Object.keys(rooms).forEach((roomId) =>
         {
             if(rooms[roomId].state.gameOn)
             {
                 const newState = updateGameState(rooms[roomId].state);
                 rooms[roomId].state = newState;
                 io.to(roomId).emit('updateGameState', {state: newState});
-
-                console.log('state sent: ',newState)
+    
+              
             }
-
-        }}, 1000/60);
+        })
+        
+    }, 1000/60);
 
 
     
