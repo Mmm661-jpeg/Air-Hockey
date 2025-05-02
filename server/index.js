@@ -15,6 +15,12 @@ const PORT = 5000;
 
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, '../client/airhockey-front/dist')));
+
+app.get('*', (req, res) => {
+res.sendFile(path.join(__dirname, '../client/airhockey-front/dist', 'index.html'));
+});
+
 
 const server = http.createServer(app);
 const io = new Server(server,{cors:
@@ -37,4 +43,4 @@ server.listen(PORT, () => {
   setupSocket(io); //manages websockets
 
 
-  app.use(express.static(path.join(__dirname, '../client/airhockey-front/dist')));
+  
