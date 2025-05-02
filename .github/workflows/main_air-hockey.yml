@@ -23,14 +23,19 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+      - name: Install dependencies
+        run:  npm run install-all
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      - name: Build client
+        run: npm run build
+
+      - name: Prepare deployment package
+        run: |
+              mkdir -p .deploy-temp
+              cp -r server/* .deploy-temp/
+              cp -r client/build .deploy-temp/client
+              cd .deploy-temp && zip -r ../release.zip .
+              cd .. && rm -rf .deploy-temp 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
