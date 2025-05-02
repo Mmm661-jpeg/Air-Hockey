@@ -1,9 +1,9 @@
 
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { canvasDimensions, GAME_DIMENSIONS } from "../../../utils/gameSettings";
-import { initialGameState,movePlayer, updateGameState } from "../../../services/singlePlayerServices"
-import { botMove } from "../../../services/botService";
+import { canvasDimensions, GAME_DIMENSIONS } from "../../../utils/gameSettings.js";
+import { initialGameState,movePlayer, updateGameState } from "../../../services/singlePlayerServices.js"
+import { botMove } from "../../../services/botService.js";
 
 function GameComponent({mode})
 {

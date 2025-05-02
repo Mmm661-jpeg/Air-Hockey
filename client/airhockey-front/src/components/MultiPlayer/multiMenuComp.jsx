@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from "react"
-import { connectSocket, getSocket } from "../../utils/socketManager"
+import { connectSocket, getSocket } from "../../utils/socketManager.js"
 
-import MultiGameComp from "./MultiGameComp";
+import MultiGameComp from "./MultiGameComp.jsx";
 
 
 function MultiMenuComp()

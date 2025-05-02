@@ -1,6 +1,6 @@
 
 
-import MultiMenuComp from "../components/MultiPlayer/multiMenuComp"
+import MultiMenuComp from "../components/MultiPlayer/multiMenuComp.jsx"
 
 function MultiPage()
 {

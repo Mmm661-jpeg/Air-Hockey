@@ -1,9 +1,9 @@
 
 
 import { useEffect, useState,useRef, useCallback } from "react";
-import { getSocket } from "../../utils/socketManager"
+import { getSocket } from "../../utils/socketManager.js"
 
-import { canvasDimensions, GAME_DIMENSIONS } from '../../utils/gameSettings' //use server dimensions eventually.
+import { canvasDimensions, GAME_DIMENSIONS } from '../../utils/gameSettings.js' //use server dimensions eventually.
 
 function MultiGameComp({firstState})
 {

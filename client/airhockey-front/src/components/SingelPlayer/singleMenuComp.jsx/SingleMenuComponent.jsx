@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-import GameComponent from "../SingleGameComp/gameComponent";
-import GameComponent2 from "../SingleGameComp/GameComp2";
+
+import GameComponent2 from "../SingleGameComp/GameComp2.jsx";
 
 
 function SingleMenuComponent()

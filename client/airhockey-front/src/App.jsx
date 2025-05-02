@@ -4,9 +4,9 @@ import './App.css'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import SinglePage from './pages/SinglePage'
-import MainMenu from './pages/MainMenu'
-import MultiPage from './pages/MultiPage'
+import SinglePage from './pages/SinglePage.jsx'
+import MainMenu from './pages/MainMenu.jsx'
+import MultiPage from './pages/MultiPage.jsx'
 
 function App() {
 

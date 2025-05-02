@@ -6,7 +6,7 @@
 //Medium
 //Hard
 
-import SingleMenuComponent from "../components/SingelPlayer/singleMenuComp.jsx/SingleMenuComponent"
+import SingleMenuComponent from "../components/SingelPlayer/singleMenuComp.jsx/SingleMenuComponent.jsx"
 
 
 function SinglePage()
