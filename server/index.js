@@ -8,6 +8,7 @@ const path = require('path');
 const {setupSocket} = require('./sockets');
 
 const app = express();
+const server = http.createServer(app);
 
 
 const PORT = process.env.PORT || 8080;
@@ -23,7 +24,6 @@ res.sendFile(path.join(__dirname, '../client/airhockey-front/dist', 'index.html'
 });
 
 
-const server = http.createServer(app);
 const io = new Server(server,{cors:
     {
         origin: '*',
@@ -33,10 +33,8 @@ const io = new Server(server,{cors:
 
 
 
-app.get("/",(req,res)=>res.send("Air hockey server is on"));
 
-
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0' ,() => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
   });
 
