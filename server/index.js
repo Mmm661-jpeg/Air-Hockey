@@ -17,10 +17,10 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../client/airhockey-front/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/{*any}', (req, res) => {
-res.sendFile(path.join(__dirname, '../client/airhockey-front/dist', 'index.html'));
+res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
 });
 
 
