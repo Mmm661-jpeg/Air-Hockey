@@ -33,7 +33,7 @@ jobs:
         run: |
               mkdir -p .deploy-temp
               cp -r server/* .deploy-temp/
-              cp -r client/airhockey-front/build .deploy-temp/client
+              cp -r client/airhockey-front/dist .deploy-temp/client
               cd .deploy-temp && zip -r ../release.zip .
               cd .. && rm -rf .deploy-temp 
 

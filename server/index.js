@@ -34,3 +34,6 @@ server.listen(PORT, () => {
 
 
   setupSocket(io); //manages websockets
+
+
+  app.use(express.static(path.join(__dirname, '../client/airhockey-front/dist')));
