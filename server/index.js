@@ -20,7 +20,9 @@ app.use(cors());
 const distPath = path.join(__dirname, '../client/dist');
 console.log('Serving static files from:', distPath);
 
-app.use(express.static(path.join(__dirname, distPath)));
+
+
+app.use(express.static(path.join(distPath)));
 
 app.get('/{*any}', (req, res) => {
 res.sendFile(path.join(distPath, 'index.html'));
