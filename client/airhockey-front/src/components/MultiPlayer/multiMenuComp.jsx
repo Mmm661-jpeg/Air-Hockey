@@ -67,12 +67,17 @@ function MultiMenuComp()
 
                 <h2 className="text-xl font-bold font-primary">{showStartButton ? 'Waiting on opponent..':'Looking for opponents...'}</h2>
 
-                <button 
+                {showStartButton &&
+
+                    <button 
                     className= {`px-6 py-3 bg-blue-${playerReady ? 200:500} text-white rounded-lg hover:bg-blue-600 transition font-primary`}
                     onClick={clickReady}
                     disabled={playerReady}>
                         Ready!
-                </button>
+                    </button>
+                }
+
+               
 
           
             </div>
