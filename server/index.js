@@ -7,6 +7,9 @@ const cors = require('cors');
 const path = require('path');
 
 
+
+
+
 const {setupSocket} = require('./sockets');
 
 const app = express();
@@ -16,8 +19,18 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'production';
 
+const allowedOrigins = [process.env.ALLOWED_ORIGIN_LOCAL, process.env.ALLOWED_ORIGIN_PRODUCTION];
 
-app.use(cors());
+const ourOrigin =  ENV === 'production' ? allowedOrigins[1] : allowedOrigins[0];
+
+
+app.use(cors(
+    {
+        origin: ourOrigin,
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type']
+    }
+));
 
 if(ENV !== 'dev')
 {
@@ -42,7 +55,9 @@ else
 
 const io = new Server(server,{cors:
     {
-        origin: '*',
+        origin: ourOrigin,
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type']
     }
 });
 
