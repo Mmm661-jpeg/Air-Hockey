@@ -1,7 +1,10 @@
 
 import { io } from "socket.io-client";
 
-const PORT = 5000 //replace with .env as source
+
+
+const PORT = process.env.PORT || 8080;
+
 
 let socket;
 
