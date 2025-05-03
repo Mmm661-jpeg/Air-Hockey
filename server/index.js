@@ -17,10 +17,12 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+const distPath = path.join(__dirname, '../client/dist');
+
+app.use(express.static(path.join(__dirname, distPath)));
 
 app.get('/{*any}', (req, res) => {
-res.sendFile(path.join(__dirname, '../client', 'index.html'));
+res.sendFile(path.join(__dirname, distPath, 'index.html'));
 });
 
 
