@@ -93,11 +93,11 @@ const botModelEasy = (paddle2,puck) =>
    
     if (Math.random() < 0.15) //15% change move wrong direction
     {
-        newX = paddle2.x - Math.sign(dist) * PADDLE_SPEED * 0.6;
+        newX = paddle2.x - Math.sign(dist) * PADDLE_SPEED;
     } 
 
     else {
-        newX = paddle2.x + Math.sign(dist) * PADDLE_SPEED * 0.8; //20% slower
+        newX = paddle2.x + Math.sign(dist) * PADDLE_SPEED * 0.7; //30% slower
     }
 
 
