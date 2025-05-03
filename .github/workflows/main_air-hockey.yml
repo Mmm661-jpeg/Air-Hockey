@@ -31,9 +31,9 @@ jobs:
 
       - name: Prepare deployment package
         run: |
-              mkdir -p .deploy-temp
+              mkdir -p .deploy-temp/client
               cp -r server/* .deploy-temp/
-              cp -r client/airhockey-front/dist .deploy-temp/client
+              cp -r client/airhockey-front/dist/* .deploy-temp/client/
               cd .deploy-temp && zip -r ../release.zip .
               cd .. && rm -rf .deploy-temp 
 

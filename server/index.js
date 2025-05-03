@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 
-const distPath = path.join(__dirname, '../client/dist');
+const distPath = path.join(__dirname, 'client');
 console.log('Serving static files from:', distPath);
 
 
