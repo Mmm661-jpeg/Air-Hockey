@@ -4,7 +4,8 @@ This is a air-hockey game (also called Pong) with a singleplayer and multiplayer
 
 ### 🚀 Demo  
 [Try the demo here](https://air-hockey-chgngvdvdcd8ekh5.swedencentral-01.azurewebsites.net/)  
-_Note: (Hosted on Azure App Service)_
+_Note: Multiplayer is currently unavailable in the demo. It works locally and will be available online soon._  
+_(Hosted on Azure App Service)_
 
 ## Features
 
